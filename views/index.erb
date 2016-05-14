@@ -1,8 +1,22 @@
 <h1>EvacuSpot Locator</h1>
-
+<form>
+<h3>Mode of Transit</h3>
+   <p>
+      <input type="radio" name="m_transit" value="by_foot" checked>Walking<br>
+      <input type="radio" name="m_transit" value="by_bike">Bicycle<br>
+      <input type="radio" name="m_transit" value="by_bus">Public Transit<br>
+      <input type="radio" name="m_transit" value="by_car">Driving<br>
+   </p>
 <h3>Use this address or submit another address:</h3>
-<p id="location-address"></p>
-
+   <p>
+      <input id="user_addr" type="text" name="user_addr" accept-charset="UTF-8">
+   </p>
+<h3>
+<p>
+   <input type="submit" text="Submit">
+</p>
+</form>
+<br>
 <div id="map-container">
   <div id="map"></div>
 </div>
@@ -36,7 +50,7 @@
             map: map,
             position: results[0].geometry.location
         });
-        document.getElementById('location-address').innerHTML = results[0].formatted_address;
+        document.getElementById('user_addr').value = results[0].formatted_address;
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
