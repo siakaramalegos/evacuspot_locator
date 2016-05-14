@@ -1,10 +1,11 @@
 # New Orleans Evacuspot Locator
 
-This open-source web application was created to assist the New Orleans community during hurricane evacuations.
+**Github Project: [https://github.com/siakaramalegos/evacuspot_locator](https://github.com/siakaramalegos/evacuspot_locator)
+**Deployment Site: [https://evacuspot-locator.herokuapp.com/](https://evacuspot-locator.herokuapp.com/)
 
-github link
-Deployment link
+>This open-source web application was created to assist the New Orleans community during hurricane evacuations. Evacuspot Locator provides the three closest evacuation assistance locations based on Geolocation or address as provided by the user. These evacuation locations are based on information collected by the City of New Orleans:
 
+City Of New Orleans Evacuspot: [http://www.nola.gov/ready/evacuspots/map/](http://www.nola.gov/ready/evacuspots/map/)
 
 ## Contributing
 
