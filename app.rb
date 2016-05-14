@@ -59,7 +59,14 @@ get '/list' do
     travel_mode = 'WALKING'
     evacuspots = Evacuspot.new.list
 
-    erb :list, locals: { origin_lat: origin_lat, origin_lng: origin_lng, evacuspots: evacuspots, travel_mode: travel_mode}
+    # Create a json version of the spots
+    # TODO: refactor to only use this in view
+    evacuspots_json = evacuspots.map do |s|
+      {type: s.type, name: s.name, address: s.address}
+    end
+    evacuspots_json = evacuspots_json.to_json
+
+    erb :list, locals: { origin_lat: origin_lat, origin_lng: origin_lng, evacuspots: evacuspots, travel_mode: travel_mode, evacuspots_json: evacuspots_json}
   else
     # Return home if no location set
     # TODO: add alert notice

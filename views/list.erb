@@ -1,11 +1,6 @@
 <h1>Your Closest Evacuspots Are:</h1>
 
-  <div class="spot-summary">
-    <ol>
-    <% evacuspots.each do |spot| %>
-      <li><%= spot.address %></li>
-    <% end %>
-    </ol>
+  <div id="spot-summary">
   </div>
 
 <script type="text/javascript">
@@ -69,7 +64,21 @@
       }
 
       console.log(top3);
+      renderTop3(top3);
     }
+  }
+
+  function renderTop3(top3){
+    var string = '';
+    var evacuspots = <%= evacuspots_json %>;
+
+    top3.forEach(function(e, i){
+      string += "<h3>" + evacuspots[e.index].name + "</h3>" +
+        "<p>" + evacuspots[e.index].address + "</p>" +
+        "<p><strong>Distance:</strong> " + e.distance.text + "<p>"
+    });
+
+    document.getElementById('spot-summary').innerHTML = string;
   }
 
 </script>
