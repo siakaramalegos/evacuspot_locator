@@ -1,7 +1,6 @@
 <h1>Your Closest Evacuspots Are:</h1>
 
-  <div id="spot-summary">
-  </div>
+<div id="spot-summary"></div>
 
 <script type="text/javascript">
   function initMatrix(){
@@ -31,6 +30,7 @@
     // the basics of a callback function.
     if (status == google.maps.DistanceMatrixStatus.OK) {
       // TODO: refactor to not create new arrays - preserve last shortest distance and check items between than and shortest current
+      // TODO: closest for driving and transit should be by time
       var rawResults = response.rows[0].elements;
       var top3 = [];
       var remaining = rawResults;
