@@ -20,3 +20,5 @@ Current Features
 * GEOIP
 
 ##Bug Reports and Feature Requests
+
+Please submit bugs and feature requests at: [https://github.com/siakaramalegos/evacuspot_locator/issues](https://github.com/siakaramalegos/evacuspot_locator/issues)
