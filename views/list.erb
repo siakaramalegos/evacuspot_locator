@@ -23,11 +23,11 @@
         origins: [origin],
         destinations: destinations,
         travelMode: google.maps.TravelMode.<%= travel_mode %>,
-        // transitOptions: TransitOptions,
+        // TODO: take traffic into account
         // drivingOptions: DrivingOptions,
         unitSystem: google.maps.UnitSystem.IMPERIAL
+        // TODO: maybe use this because of contraflow
         // avoidHighways: Boolean,
-        // avoidTolls: Boolean,
       }, callback);
   }
 
@@ -69,21 +69,6 @@
       }
 
       console.log(top3);
-
-      var origins = response.originAddresses;
-      var destinations = response.destinationAddresses;
-
-      for (var i = 0; i < origins.length; i++) {
-        var results = response.rows[i].elements;
-        for (var j = 0; j < results.length; j++) {
-          var element = results[j];
-          var distance = element.distance.text;
-          var duration = element.duration.text;
-          var from = origins[i];
-          var to = destinations[j];
-        }
-        // console.log(results);
-      }
     }
   }
 
