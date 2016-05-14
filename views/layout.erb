@@ -3,13 +3,20 @@
 <head>
   <title>EvacuSpot Locator</title>
 
-  <!-- Stylesheets and Fonts -->
-  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <!-- Bootstrap and Fonts -->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,700,300,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <!-- Custom Style -->
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+
 </head>
 <body>
 
-  <%= yield %>
+  <div class="container-fluid">
+    <%= yield %>
+  </div>
 
 </body>
 </html>
