@@ -14,10 +14,12 @@ Current Features
 
 ## How to Contribute
 
+Evacupsot Locater is a straight forward web app using the following resources:
+
 * Ruby version 2.2.1
-* Google Map API
-* NOLA data resource
-* GEOIP
+* Google Map API using Javascript - [https://developers.google.com/maps/](https://developers.google.com/maps/)
+* NOLA data resource - [https://data.nola.gov/](https://data.nola.gov/)
+* GEOIP Location - [http://freegeoip.net/](http://freegeoip.net/)
 
 ##Bug Reports and Feature Requests
 
