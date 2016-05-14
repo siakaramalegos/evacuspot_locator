@@ -88,6 +88,8 @@ end
 
 # Directions page
 get '/directions' do
+  origin_lat = session[:location][:latitude]
+  origin_lng = session[:location][:longitude]
   spot = session[:evacuspots][params[:spot].to_i]
-  erb :directions, locals: {spot: spot}
+  erb :directions, locals: {spot: spot, latitude: origin_lat, longitude: origin_lng}
 end
