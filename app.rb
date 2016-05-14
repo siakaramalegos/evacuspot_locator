@@ -50,13 +50,24 @@ get '/' do
   erb :index, locals: { latitude: latitude, longitude: longitude }
 end
 
+# TODO: get session to work
+post '/set_origin' do
+  # TODO: Add validations
+  # TODO: Use address entered
+  # TODO: Refactor to use original location or address
+  session[:travel_mode] = params[:travel_mode]
+  session[:origin] = params[:user_address]
+
+  redirect to ('/list')
+end
+
 # List of closest EvacuSpots
 get '/list' do
   if session[:location]
     origin_lat = session[:location][:latitude]
     origin_lng = session[:location][:longitude]
-    # TODO: give options on index page for WALKING, BICYCLING, TRANSIT, DRIVING
-    travel_mode = 'WALKING'
+    travel_mode = params[:travel_mode]
+
     evacuspots_structs = Evacuspot.new.list
 
     # Create a json version of the spots
