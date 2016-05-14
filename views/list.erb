@@ -9,7 +9,7 @@
     var destinations = [];
 
     <% evacuspots.each do |spot| %>
-      destinations.push(new google.maps.LatLng(<%= spot.latitude %>, <%= spot.longitude %>))
+      destinations.push(new google.maps.LatLng(<%= spot[:latitude] %>, <%= spot[:longitude] %>))
     <% end %>
 
     var service = new google.maps.DistanceMatrixService();
@@ -75,7 +75,8 @@
     top3.forEach(function(e, i){
       string += "<h3>" + evacuspots[e.index].name + "</h3>" +
         "<p>" + evacuspots[e.index].address + "</p>" +
-        "<p><strong>Distance:</strong> " + e.distance.text + "<p>"
+        "<p><strong>Distance:</strong> " + e.distance.text + "<p>" +
+        "<a href='/directions?spot=" + e.index + "'>Get Directions</a>"
     });
 
     document.getElementById('spot-summary').innerHTML = string;

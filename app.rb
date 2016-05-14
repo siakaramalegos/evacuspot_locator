@@ -57,14 +57,15 @@ get '/list' do
     origin_lng = session[:location][:longitude]
     # TODO: give options on index page for WALKING, BICYCLING, TRANSIT, DRIVING
     travel_mode = 'WALKING'
-    evacuspots = Evacuspot.new.list
+    evacuspots_structs = Evacuspot.new.list
 
     # Create a json version of the spots
     # TODO: refactor to only use this in view
-    evacuspots_json = evacuspots.map do |s|
-      {type: s.type, name: s.name, address: s.address}
+    evacuspots = evacuspots_structs.map do |s|
+      {type: s.type, name: s.name, address: s.address, latitude: s.latitude, longitude: s.longitude}
     end
-    evacuspots_json = evacuspots_json.to_json
+    evacuspots_json = evacuspots.to_json
+    session[:evacuspots] = evacuspots
 
     erb :list, locals: { origin_lat: origin_lat, origin_lng: origin_lng, evacuspots: evacuspots, travel_mode: travel_mode, evacuspots_json: evacuspots_json}
   else
@@ -76,5 +77,6 @@ end
 
 # Directions page
 get '/directions' do
-  erb :directions
+  spot = session[:evacuspots][params[:spot].to_i]
+  erb :directions, locals: {spot: spot}
 end
