@@ -10,6 +10,7 @@ require 'envyable'
 
 # Load other Ruby files needed for app
 require_relative 'helpers/evacuspot_helper'
+require_relative 'evacuspot_model'
 
 # Load secrets
 Envyable.load('env.yml')
@@ -51,7 +52,8 @@ end
 
 # List of closest EvacuSpots
 get '/list' do
-  erb :list
+  evacuspots = Evacuspot.new.list
+  erb :list, locals: { evacuspots: evacuspots}
 end
 
 # Directions page

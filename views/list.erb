@@ -1,1 +1,8 @@
 <h1>Your Closest Evacuspots Are:</h1>
+
+<% evacuspots.each do |spot| %>
+  <div class="spot-summary">
+    <h3><%= spot.name %>, <%= spot.type %></h3>
+    <p><%= spot.address %></p>
+  </div>
+<% end %>
