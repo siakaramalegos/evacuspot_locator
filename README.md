@@ -10,7 +10,10 @@
 
 New Orleans Evacuspot Locator is an open project and welcomes contributions from the community. The project is in its initial development phase and features are currently being considered. Although the focus is to assist with evacuation needs for the Greater New Orleans area, there may be opportunities to extend functionalities to areas with similar needs.
 
-Current Features
+**Current Features** - In Production
+* Search for the three nearest or most accesible evacution locations based on IP/Address
+* Provide directions to evacuation location
+* Provide distance to evacutaion location
 
 ## How to Contribute
 
