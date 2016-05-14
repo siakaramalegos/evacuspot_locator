@@ -1,1 +1,47 @@
 <h1>EvacuSpot Locator</h1>
+
+<h3>Use this address or submit another address:</h3>
+<p id="location-address"></p>
+
+<div id="map-container">
+  <div id="map"></div>
+</div>
+
+<script>
+  var map, mapOptions, geocoder;
+  var myLocation = {lat: <%= latitude %>, lng: <%= longitude %>};
+
+  function initMap(){
+    geocoder = new google.maps.Geocoder();
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: myLocation,
+      zoom: 13
+    });
+
+    locationAddress(geocoder, map);
+  }
+
+  function locationAddress(geocoder, map) {
+        console.log('ok');
+
+    var location = myLocation;
+    geocoder.geocode( { 'location': myLocation}, function(results, status) {
+        console.log('ok');
+
+      if (status == google.maps.GeocoderStatus.OK) {
+        console.log(results);
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+        document.getElementById('location-address').innerHTML = results[0].formatted_address;
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&callback=initMap" async defer></script>
+
