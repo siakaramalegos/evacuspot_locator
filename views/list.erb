@@ -1,4 +1,4 @@
-<h1>Your Closest Evacuspots Are:</h1>
+<h1 class="text-primary">Your Closest Evacuspots Are:</h1>
 
 <div id="spot-summary"></div>
 
@@ -73,10 +73,12 @@
     var evacuspots = <%= evacuspots_json %>;
 
     top3.forEach(function(e, i){
-      string += "<h3>" + evacuspots[e.index].name + "</h3>" +
+      string += '<div class="well"><div class="row"><div class="col-sm-3"><img src="http://placehold.it/150x150"></div><div class="col-sm-9">' +
+        "<h3>" + evacuspots[e.index].name + "</h3>" +
         "<p>" + evacuspots[e.index].address + "</p>" +
         "<p><strong>Distance:</strong> " + e.distance.text + "<p>" +
-        "<a href='/directions?spot=" + e.index + "&mode=<%= travel_mode %>'>Get Directions</a>"
+        "<a href='/directions?spot=" + e.index + "&mode=<%= travel_mode %>'>Get Directions</a>" +
+        "</div></div></div>"
     });
 
     document.getElementById('spot-summary').innerHTML = string;
