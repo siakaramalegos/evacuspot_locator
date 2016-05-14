@@ -25,6 +25,17 @@ enable :sessions
 #     Routes and controls
 # ****************************
 
+# Home page
 get '/' do
   erb :index
+end
+
+# List of closest EvacuSpots
+get '/list' do
+  erb :list
+end
+
+# Directions page
+get '/directions' do
+  erb :directions
 end
