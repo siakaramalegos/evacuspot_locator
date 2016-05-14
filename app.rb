@@ -52,8 +52,19 @@ end
 
 # List of closest EvacuSpots
 get '/list' do
-  evacuspots = Evacuspot.new.list
-  erb :list, locals: { evacuspots: evacuspots}
+  if session[:location]
+    origin_lat = session[:location][:latitude]
+    origin_lng = session[:location][:longitude]
+    # TODO: give options on index page for WALKING, BICYCLING, TRANSIT, DRIVING
+    travel_mode = 'WALKING'
+    evacuspots = Evacuspot.new.list
+
+    erb :list, locals: { origin_lat: origin_lat, origin_lng: origin_lng, evacuspots: evacuspots, travel_mode: travel_mode}
+  else
+    # Return home if no location set
+    # TODO: add alert notice
+    redirect to ('/')
+  end
 end
 
 # Directions page

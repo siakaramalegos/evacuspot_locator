@@ -23,11 +23,9 @@
   }
 
   function locationAddress(geocoder, map) {
-        console.log('ok');
 
     var location = myLocation;
     geocoder.geocode( { 'location': myLocation}, function(results, status) {
-        console.log('ok');
 
       if (status == google.maps.GeocoderStatus.OK) {
         console.log(results);

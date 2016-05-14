@@ -1,8 +1,91 @@
 <h1>Your Closest Evacuspots Are:</h1>
 
-<% evacuspots.each do |spot| %>
   <div class="spot-summary">
-    <h3><%= spot.name %>, <%= spot.type %></h3>
-    <p><%= spot.address %></p>
+    <ol>
+    <% evacuspots.each do |spot| %>
+      <li><%= spot.address %></li>
+    <% end %>
+    </ol>
   </div>
-<% end %>
+
+<script type="text/javascript">
+  function initMatrix(){
+    var origin = new google.maps.LatLng(<%= origin_lat %>, <%= origin_lng %>);
+    var destinations = [];
+
+    <% evacuspots.each do |spot| %>
+      destinations.push(new google.maps.LatLng(<%= spot.latitude %>, <%= spot.longitude %>))
+    <% end %>
+
+    var service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix(
+      {
+        origins: [origin],
+        destinations: destinations,
+        travelMode: google.maps.TravelMode.<%= travel_mode %>,
+        // transitOptions: TransitOptions,
+        // drivingOptions: DrivingOptions,
+        unitSystem: google.maps.UnitSystem.IMPERIAL
+        // avoidHighways: Boolean,
+        // avoidTolls: Boolean,
+      }, callback);
+  }
+
+  function callback(response, status) {
+    // See Parsing the Results for
+    // the basics of a callback function.
+    if (status == google.maps.DistanceMatrixStatus.OK) {
+      // TODO: refactor to not create new arrays - preserve last shortest distance and check items between than and shortest current
+      var rawResults = response.rows[0].elements;
+      var top3 = [];
+      var remaining = rawResults;
+      var shortestIndex, topItem;
+
+      // Save index of the result in the result object
+      for (var i = 0; i < rawResults.length; i++){
+        rawResults[i].index = i;
+      }
+
+      // Get the top 3 shortest destinations by distance
+      // TODO: switch to time for driving and public transit
+      for (var i = 0; i < 3; i++) {
+        shortestIndex = 0;
+
+        remaining.forEach(function(element, index){
+          if (element.distance.value < rawResults[shortestIndex].distance.value){
+            shortestIndex = index;
+          }
+        });
+
+        // Put the shortest item in the top 3 list
+        topItem = remaining[shortestIndex]
+        top3.push(topItem);
+
+        // Delete the shortest item from remaining
+        var index = remaining.indexOf(topItem);
+        if (index > -1) {
+          remaining.splice(index, 1);
+        }
+      }
+
+      console.log(top3);
+
+      var origins = response.originAddresses;
+      var destinations = response.destinationAddresses;
+
+      for (var i = 0; i < origins.length; i++) {
+        var results = response.rows[i].elements;
+        for (var j = 0; j < results.length; j++) {
+          var element = results[j];
+          var distance = element.distance.text;
+          var duration = element.duration.text;
+          var from = origins[i];
+          var to = destinations[j];
+        }
+        // console.log(results);
+      }
+    }
+  }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&callback=initMatrix" async defer></script>
